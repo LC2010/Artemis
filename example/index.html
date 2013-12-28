@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Artemis</title>
+    
+    <script src="../lib/jquery/jquery.js"></script>
+    <script src="../lib/widgets/widgets.js"></script>
+    <script src="../src/eventemitter/eventemitter.js"></script>
+    <script src="../src/json/json.js"></script>
+    <script src="../src/storage/storage.js"></script>
+    <script src="main.js"></script>
+</head>
+<body>
+<div id="odiv" style="width:100px;height:100px;background-color:blue;position:absolute;left:10px"></div>
+<script>
+
+
+$(function () {
+    $.storage.set('number', Math.random());
+
+    ArtemisHub.on('global::server', function (data) {
+        console.log(data);
+    });
+
+    ArtemisHub.emit('global::server', { name: $.storage.get('number') });
+
+    $('#odiv').click(function () {
+        console.log($(this).position);
+        $(this).position({ my: 'left + 100' });
+    });
+});
+</script>    
+</body>
+</html>
