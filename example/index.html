@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Artemis</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
     <script>var Artemis = Artemis || {};</script>
     <script src="../lib/core/localjs.js"></script>
     <script src="../src/json/json.js"></script>
@@ -15,10 +16,12 @@
     
     <script src="../lib/core/qboot.js"></script>
     <script src="../lib/core/qboot.load.js"></script>
+    <script src="../src/widgets/slider/slider.js"></script>
     
 </head>
 <body>
-<div id="odiv" style="width:100px;height:100px;background-color:blue;position:absolute;left:10px"></div>
+
+<div id="slider"></div>
 <script>
 
 
@@ -31,17 +34,14 @@ $(function () {
 
     ArtemisHub.emit('global::server', { name: $.storage.get('number') });
 
-    $('#odiv').click(function () {
-        console.log($(this).position);
-        $(this).position({ my: 'left + 100' });
-    });
+
 
     $.cookie('name', 'liangchao', { expires: 7 });
     $.cookie('age', 23, { expires: 7 });
     console.log($.cookie());
 
     console.log(Artemis.config.get('version'), Artemis.config.get('name', 'lc'));
-    console.log(Artemis.config.__config__);
+    
     console.log(Artemis.core.str.trim(" Hello Wolrd "));
 
     var __qbootvar = 1;
@@ -59,12 +59,14 @@ $(function () {
     });
 
     // CMD模块加载
-    __d('appInit', ['common.js.mid'], function (global, require, requireDynamic, requireLazy) {
+    __d('appInit', ['common.js.mid', 'widget.ui.slider'], function (global, require, requireDynamic, requireLazy) {
         var MID = require('common.js.mid');
+        $('#slider').slider();
         console.log(MID.mid);
+        console.log(Artemis.config.__config__);
     }, 3);
 
-    
+
 });
 </script>    
 </body>
