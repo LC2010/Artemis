@@ -57,6 +57,14 @@ $(function () {
     ArtemisHub.on('global::viewport.change', function (e) {
         console.log(e);
     });
+
+    // CMD模块加载
+    __d('appInit', ['common.js.mid'], function (global, require, requireDynamic, requireLazy) {
+        var MID = require('common.js.mid');
+        console.log(MID.mid);
+    }, 3);
+
+    
 });
 </script>    
 </body>
