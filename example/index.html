@@ -58,13 +58,21 @@ $(function () {
         console.log(e);
     });
 
-    // CMD模块加载
-    __d('appInit', ['common.js.mid', 'widget.ui.slider'], function (global, require, requireDynamic, requireLazy) {
-        var MID = require('common.js.mid');
-        $('#slider').slider();
-        console.log(MID.mid);
-        console.log(Artemis.config.__config__);
-    }, 3);
+    /**
+     * OO模式类
+     */
+    var Pig = Class.create({
+        initialize: function (name) {
+            this.name = name;
+        },
+
+        talk: function () {
+            console.log('this is --> ', this.name);
+        }
+    });
+
+    var pig = new Pig('fat pig');
+    pig.talk();
 
 
 });
